@@ -1,0 +1,17 @@
+# Backend
+/backend/target/
+/backend/.mvn/wrapper/maven-wrapper.jar
+
+# Frontend
+/frontend/sudoku-solver-frontend/node_modules/
+/frontend/sudoku-solver-frontend/dist/
+/frontend/sudoku-solver-frontend/.angular/
+
+# IDEs
+*.iml
+.idea/
+.vscode/
+
+# Docker
+**/.DS_Store
+

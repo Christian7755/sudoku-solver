@@ -1,0 +1,28 @@
+
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sudoku-solver-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    networks:
+      - sudoku-net
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: sudoku-solver-frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app
+    networks:
+      - sudoku-net
+
+networks:
+  sudoku-net:
