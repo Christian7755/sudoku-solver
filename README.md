@@ -38,3 +38,5 @@ Eventuell Paktet für Tests:
 npm install --save-dev @types/jasmine jasmine-core karma karma-chrome-launcher karma-jasmine karma-jasmine-html-reporter
 npm install --save-dev karma karma-jasmine karma-chrome-launcher karma-jasmine-html-reporter
 npm install --save-dev karma-coverage
+
+npm install zone.js --save
