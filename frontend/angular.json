@@ -13,10 +13,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "polyfills": "src/polyfills.ts",
             "outputPath": "dist/sudoku-solver-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {

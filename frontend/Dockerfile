@@ -5,7 +5,7 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Installiere die Angular CLI global
-RUN npm install -g @angular/cli
+#RUN npm install -g @angular/cli
 
 # Erstelle ein neues Angular-Projekt (wenn es noch nicht existiert)
 #RUN ng new sudoku-solver-frontend --defaults --skip-git

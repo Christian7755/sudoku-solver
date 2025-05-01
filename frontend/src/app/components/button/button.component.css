@@ -1,3 +1,10 @@
 .default-button {
     border-color: blue;
+    padding: 10px 20px;
+    border: 3px;
+    border-radius: 5px;
+}
+
+.default-button:hover {
+    background-color: aqua;
 }
