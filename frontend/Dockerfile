@@ -10,7 +10,7 @@ WORKDIR /app
 # Erstelle ein neues Angular-Projekt (wenn es noch nicht existiert)
 #RUN ng new sudoku-solver-frontend --defaults --skip-git
 
-COPY ./frontend /app
+COPY . /app
 
 # Wechsel in das erstellte Projekt
 #WORKDIR /app/sudoku-solver-frontend
