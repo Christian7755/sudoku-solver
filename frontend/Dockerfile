@@ -5,18 +5,20 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Installiere die Angular CLI global
-#RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli
 
 # Erstelle ein neues Angular-Projekt (wenn es noch nicht existiert)
 #RUN ng new sudoku-solver-frontend --defaults --skip-git
 
-COPY . /app
-
-# Wechsel in das erstellte Projekt
-#WORKDIR /app/sudoku-solver-frontend
+# Kopiere package.json und package-lock.json (damit npm install nur die Abhängigkeiten installiert)
+COPY ./package.json ./package-lock.json /app/
 
 # Installiere die Abhängigkeiten
 RUN npm install
+
+# Kopiere den Rest des Projekts
+COPY . /app
+
 
 # Exponiere Port 4200 für den Dev-Server
 EXPOSE 4200
