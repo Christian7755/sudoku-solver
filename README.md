@@ -42,3 +42,6 @@ npm install --save-dev karma-coverage
 npm install zone.js --save
 
 npm install @angularclass/hmr --save-dev
+
+
+Erweiterung Dosuku API, eventuell JWT

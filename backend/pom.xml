@@ -8,12 +8,19 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <name>backend</name>
+    <description>sudoku-solver-backend</description>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.4</version>  <!-- **Änderung:** Version von Spring Boot hinzugefügt -->
         <relativePath/> <!-- Entfernt die Notwendigkeit, ein parent POM zu haben -->
     </parent>
+
+    <properties>
+        <java-version>17</java-version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -64,6 +71,17 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.9.2</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <artifactId>spring-boot-devtools</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
