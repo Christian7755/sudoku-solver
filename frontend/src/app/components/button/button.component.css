@@ -1,10 +1,15 @@
 .default-button {
-    border-color: blue;
-    padding: 10px 20px;
-    border: 3px;
+    border: 3px solid blue;
+    margin: 1em;
+    width: 20%;
+    height: 20%;
     border-radius: 5px;
+    color: blue;
+    margin: 10px;
+    transition: all 0.3s ease;       /* Sanfte Übergänge für Hover-Effekte */
+    background-color: transparent;
 }
 
 .default-button:hover {
-    background-color: aqua;
+    background-color: blue;
 }

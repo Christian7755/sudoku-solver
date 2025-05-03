@@ -6,7 +6,7 @@
     "sudoku-solver-frontend": {
       "projectType": "application",
       "schematics": {},
-      "root": "",
+      "root": "src",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -18,6 +18,7 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "sourceMap":true,
             "assets": [
               {
                 "glob": "**/*",
@@ -46,9 +47,9 @@
               "outputHashing": "all"
             },
             "development": {
-              "optimization": false,
+              "optimization": true,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": false
             }
           },
           "defaultConfiguration": "production"

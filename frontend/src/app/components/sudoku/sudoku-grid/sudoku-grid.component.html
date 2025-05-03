@@ -1,0 +1,12 @@
+<div class="sudoku-grid">
+  <!-- Schleife durch jede Zeile -->
+  <div *ngFor="let col of grid; let colIndex = index">
+    <!-- Schleife durch jede Zelle in der aktuellen Reihe -->
+    <app-sudoku-cell *ngFor="let cell of col; let rowIndex = index"
+                     [row]="rowIndex"
+                     [col]="colIndex"
+                     [value]="cell"
+                     (cellUpdated)="updateCell($event)">
+    </app-sudoku-cell>
+  </div>
+</div>

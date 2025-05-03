@@ -1,0 +1,8 @@
+<div class="sudoku-cell"
+    [ngClass]="['row-' + row, 'col-' + col]">
+    <input class ="sudoku-cell-input" 
+    type="number" 
+    [(ngModel)]="value" 
+    (change)="onCellChange(value)"
+    pattern="^[0-9]*$" />
+</div>

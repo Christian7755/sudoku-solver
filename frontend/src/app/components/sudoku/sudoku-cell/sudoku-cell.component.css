@@ -1,0 +1,56 @@
+.sudoku-cell {
+    /*display: flex;
+    justify-content: center;*/
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: white;  /* Weiße Hintergrundfarbe */
+    border: 1px solid #ccc;  /* Grauer Rand um jede Zelle */
+    text-align: center;
+  }
+  .sudoku-cell-input {
+    border: none;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+  }
+
+  .sudoku-cell-input:focus {
+    outline: 2px solid blue;  /* Blaue Umrandung beim Fokussieren */
+  }
+  
+  .sudoku-cell.row-2, .sudoku-cell.row-5, .sudoku-cell.row-8 {
+    border-bottom: solid 2px blue;  /* Dickere Linie zwischen den Reihen für 3x3 Blöcke */
+    border-top: 1px solid #ccc;
+}
+  
+  .sudoku-cell.col-2, .sudoku-cell.col-5, .sudoku-cell.col-8 {
+    border-right: solid 2px blue;  /* Dickere Linie zwischen den Spalten für 3x3 Blöcke */
+    border-left: 1px solid #ccc;
+}
+
+  
+ /* .sudoku-cell-input {
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    background-color: white;  /* Weißer Hintergrund für das Eingabefeld 
+    font-weight: bold;
+  }
+  .sudoku-cell.cell-1-1 {
+    background-color: black;
+  }
+  
+  .sudoku-cell-input:focus {
+    outline: 2px solid blue;  /* Blaue Umrandung, wenn das Eingabefeld fokussiert wird 
+  }
+
+  .sudoku-cell input {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /*Anpassen: 9er Blöcke dickerer Rahmen, nur bestimmt Werte erlauben 
+*/

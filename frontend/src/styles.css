@@ -1,3 +1,8 @@
 body {
     background-color: beige;
 }
+
+/*für die Gestaltung des Sudokus mit den Componenten muss der Rahmen in der Größe der Zellen einbezogen sein */
+* {
+    box-sizing: border-box;
+}
