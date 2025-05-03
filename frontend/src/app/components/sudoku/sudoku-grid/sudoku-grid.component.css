@@ -1,13 +1,16 @@
 .sudoku-grid {
     width: 360px;
     height: 360px;
-    display: grid;
-    grid-template-columns: repeat(9, 40px); /* 9 Spalten für das 9x9 Gitter */
-    grid-template-rows: repeat(9, 40px);    /* 9 Reihen für das 9x9 Gitter */
+    display: flex;
+    flex-direction: column;
     border: 2px solid blue;
     margin: 20px;
   }
 
+.sudoku-row {
+  display: flex;
+  flex-direction: row;
+}
   .sudoku-grid app-sudoku-cell {
     margin: 0;
     padding: 0;

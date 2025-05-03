@@ -3,6 +3,6 @@
     <input class ="sudoku-cell-input" 
     type="number" 
     [(ngModel)]="value" 
-    (change)="onCellChange(value)"
-    pattern="^[0-9]*$" />
+    (change)="onCellChange(+value)"
+    min="0" max="9" />
 </div>

@@ -1,8 +1,8 @@
 <div class="sudoku-grid">
   <!-- Schleife durch jede Zeile -->
-  <div *ngFor="let col of grid; let colIndex = index">
+  <div class="sudoku-row" *ngFor="let row of grid; let rowIndex = index; trackBy: trackByIndex">
     <!-- Schleife durch jede Zelle in der aktuellen Reihe -->
-    <app-sudoku-cell *ngFor="let cell of col; let rowIndex = index"
+    <app-sudoku-cell *ngFor="let cell of row; let colIndex = index; trackBy: trackByIndex"
                      [row]="rowIndex"
                      [col]="colIndex"
                      [value]="cell"
