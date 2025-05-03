@@ -40,3 +40,5 @@ npm install --save-dev karma karma-jasmine karma-chrome-launcher karma-jasmine-h
 npm install --save-dev karma-coverage
 
 npm install zone.js --save
+
+npm install @angularclass/hmr --save-dev

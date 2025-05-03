@@ -16,6 +16,7 @@ export class SudokuCellComponent {
 onCellChange(value: number): void {
   //Sendet den Wert an das SudokuGridComponent
   this.cellUpdated.emit({row: this.row, col: this.col, value});
+  console.log("Field column " + this.col +" and row " + this.row + " changed to " +this.value);
 }
 
 }

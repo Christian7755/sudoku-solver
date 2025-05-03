@@ -32,6 +32,10 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "budgets": [
                 {
                   "type": "initial",
@@ -47,21 +51,32 @@
               "outputHashing": "all"
             },
             "development": {
-              "optimization": true,
+              "optimization": false,
               "extractLicenses": false,
-              "sourceMap": false
+              "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "poll": 2000,
+            "hmr": true,
+            "liveReload": true
+          },
           "configurations": {
             "production": {
               "buildTarget": "sudoku-solver-frontend:build:production"
             },
             "development": {
               "buildTarget": "sudoku-solver-frontend:build:development"
+            },
+            "hmr": {
+            "buildTarget": "sudoku-solver-frontend:build:development",
+              "hmr": true,
+              "watch": true,
+              "liveReload": true
             }
           },
           "defaultConfiguration": "development"

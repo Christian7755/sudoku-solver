@@ -29,15 +29,17 @@ export class SudokuGridComponent implements OnInit {
 
   //access a certain cell
   setCell(row: number, col: number, value: number): void {
-    this.grid[row][col] = value;
+    this.grid[col][row] = value;
   }
 
   //Getting a certain cell
   getCell(row: number, col: number): number {
-    return this.grid[row][col];
+    return this.grid[col][row];
   }
 
   updateCell(event: { row: number, col: number, value: number}) {
-    this.grid[event.row][event.col] = event.value;
+    this.grid[event.col][event.row] = event.value;
+
+    console.log("Sudoku-Grid: update cell col" + event.col + " and row " + event.row + " with value " + event.value );
   }
 }
