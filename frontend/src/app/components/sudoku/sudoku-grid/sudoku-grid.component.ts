@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SudokuApiService } from '../../../services/sudoku-api.service';
 
 @Component({
   selector: 'app-sudoku-grid',
@@ -21,11 +22,23 @@ export class SudokuGridComponent implements OnInit {
     [0,0,0,0,0,0,0,0,0]
   ];
 
+  message = '';
+
   ngOnInit(): void {
       
   }
 
-  constructor() { }
+  constructor(private api: SudokuApiService) { }
+
+  solve(): void {
+    this.api.solve(this.grid).subscribe({
+      next: res => {
+        this.grid = res.grid;
+        this.message = res.message;
+      },
+      error: err => this.message = 'Fehler: ' + err.message
+    })
+  }
 
   //access a certain cell
   setCell(row: number, col: number, value: number): void {
