@@ -5,15 +5,15 @@
     flex-direction: column;
 }
 
-.container {
+.container_main {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     gap: 20px
 }
 
 @media (max-width: 768px) {
-    .container {
+    .container_main {
         flex-direction: column;
     }
 
