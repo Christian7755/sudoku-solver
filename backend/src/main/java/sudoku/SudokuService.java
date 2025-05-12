@@ -13,7 +13,6 @@ public class SudokuService {
 
     public int[][] solve(int[][] grid) {
         validator.validate(grid);
-        return grid;
-        //return solver.solve(grid);
+        return solver.solve(grid);
     } 
 }

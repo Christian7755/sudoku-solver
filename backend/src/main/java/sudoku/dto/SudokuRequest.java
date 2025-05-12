@@ -1,6 +1,8 @@
 package sudoku.dto;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-public record SudokuRequest(@NotNull int[][] grid) {
+
+public record SudokuRequest(@NotNull @Size(min = 9, max = 9) int[][] grid) {
 }

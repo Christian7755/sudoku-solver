@@ -12,10 +12,13 @@
     COPY src src
     RUN mvn -B -q package -DskipTests
     
+    #Dev mode for development
+    #ENV SPRING_PROFILES_ACTIVE=dev
+
     # -------- Runtime‑Stage --------
     FROM eclipse-temurin:21-jre
     WORKDIR /app
-    COPY --from=build /workspace/target/*.jar app.jar
+    COPY --from=build /workspace/target/sudoku-backend-*-SNAPSHOT.jar app.jar
     EXPOSE 8080
     ENTRYPOINT ["java","-jar","app.jar"]
     
