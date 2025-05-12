@@ -10,6 +10,7 @@ import sudoku.dto.SudokuResponse;
 @RestController
 @RequestMapping("/api/sudoku")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class SudokuController {
     
     private final SudokuService sudokuService;
