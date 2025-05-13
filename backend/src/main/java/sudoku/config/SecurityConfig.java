@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 //Smoke Test
                 .requestMatchers(HttpMethod.GET, "/api/ping").permitAll()
+                .requestMatchers("/api/sudoku/solve/**").permitAll()
                 // alles Weitere nur mit gültigem JWT
                 .anyRequest().authenticated());
 

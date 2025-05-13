@@ -1,7 +1,7 @@
 # src/main/resources/application.yml
 jwt:
   secret: "meinGeheimerSchluesselDerMindestens32ZeichenLangIst"
-  expirationMinutes: 60
+  expirationMinutes: 5000
 
 # >>> alle Demo-User liegen jetzt hier
   auth:

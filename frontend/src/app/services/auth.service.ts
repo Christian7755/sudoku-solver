@@ -1,26 +1,50 @@
+// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private tokenKey = 'auth_token'; // Hier speichern wir den Token im LocalStorage
+  private readonly baseUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Führt den Login durch, schreibt den erhaltenen JWT in localStorage
+   * und gibt ihn (als Observable) an den Aufrufer zurück.
+   */
+  login(username: string, password: string): Observable<string> {
+    const body =
+      `username=${encodeURIComponent(username)}` +
+      `&password=${encodeURIComponent(password)}`;
 
+    const headers = new HttpHeaders()
+                      .set('Content-Type', 'application/x-www-form-urlencoded');
 
-  saveToken(token: string) {
-    localStorage.setItem(this.tokenKey, token);
+    /* <------  KEIN tap – wir verpacken den Aufruf in ein eigenes Observable */
+    return new Observable<string>(observer => {
+      this.http.post(this.baseUrl + '/login', body, {
+          headers,
+          responseType: 'text'        // ← Token kommt als Klartext (string)
+      }).subscribe({
+        next: token => {
+          localStorage.setItem('token', token); // im Browser speichern
+          observer.next(token);                 // an Komponenten weitergeben
+          observer.complete();
+        },
+        error: err => observer.error(err)
+      });
+    });
   }
 
+  /** Gibt den aktuell gespeicherten Token zurück (oder null). */
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return localStorage.getItem('token');
   }
 
-  logout() {
-    localStorage.removeItem(this.tokenKey);
+  /** Entfernt den Token wieder. */
+  logout(): void {
+    localStorage.removeItem('token');
   }
 }
