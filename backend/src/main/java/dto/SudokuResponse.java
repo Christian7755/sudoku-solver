@@ -1,4 +1,4 @@
-package sudoku.dto;
+package dto;
 
 public record SudokuResponse(
     int[][] grid,

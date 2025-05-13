@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sudoku.dto.SudokuRequest;
-import sudoku.dto.SudokuResponse;
+import dto.SudokuRequest;
+import dto.SudokuResponse;
 
 @RestController
 @RequestMapping("/api/sudoku")

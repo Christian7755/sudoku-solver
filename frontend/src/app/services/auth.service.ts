@@ -10,10 +10,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string) {
-    const url = `http://localhost:8080/api/auth/login?username=${username}&password=${password}`;
-    return this.http.post(url, null, { responseType: 'text' });
-  }
+
 
   saveToken(token: string) {
     localStorage.setItem(this.tokenKey, token);

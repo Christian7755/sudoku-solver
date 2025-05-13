@@ -18,13 +18,7 @@ export class AppComponent {
 
   constructor(private authService: AuthService) {}
 
-  login() {
 
-    this.authService.login('admin', 'Start123').subscribe(token => {
-      this.authService.saveToken(token);
-      console.log('Token gespeichert:', token);
-    })
-  }
   
 
   callSolve(): void{

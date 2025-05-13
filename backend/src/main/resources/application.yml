@@ -1,5 +1,4 @@
-spring: 
-  security:
-    user:
-      name: admin
-      passwort: Start123
+# src/main/resources/application.yml
+jwt:
+  secret: "meinGeheimerSchluesselDerMindestens32ZeichenLangIst"
+  expirationMinutes: 60

@@ -1,4 +1,4 @@
-package sudoku.jwt;
+package jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
