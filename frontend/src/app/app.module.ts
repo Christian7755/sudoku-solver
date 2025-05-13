@@ -7,7 +7,7 @@ import { SudokuCellComponent } from './components/sudoku/sudoku-cell/sudoku-cell
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './auth.interceptor';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 @NgModule({
 declarations: [
@@ -20,7 +20,7 @@ declarations: [
     ButtonComponent,
     FormsModule,
   ],
-  providers: [provideHttpClient() ,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [provideHttpClient() ,{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent] 
 })
 export class AppModule { }

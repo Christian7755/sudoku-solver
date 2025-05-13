@@ -2,3 +2,14 @@
 jwt:
   secret: "meinGeheimerSchluesselDerMindestens32ZeichenLangIst"
   expirationMinutes: 60
+
+# >>> alle Demo-User liegen jetzt hier
+  auth:
+    users:
+      admin: "{bcrypt}$2a$10$K1l4l/5O7Sx0A8g6k2RcAuQcgV2k.ePxQStg5DoubleuK9Ke6hOtW"
+      demo:  "{noop}demo123"         # bleibt zum Testen Klartext
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
