@@ -21,4 +21,9 @@ export class SudokuApiService {
     generate(): Observable<SudokuResponse> {
         return this.http.get<SudokuResponse>(`${this.baseUrl}/generate`);
     }
+
+    //liefert CSV zurück als BLOB (Binary Large Object)
+    exportCsv(grid: number[][]): Observable<Blob> {
+        return this.http.post(`${this.baseUrl}/export`, { grid }, { responseType: 'blob'});
+    }
 }

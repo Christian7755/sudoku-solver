@@ -28,6 +28,10 @@ export class AppComponent {
   callGenerate(): void{
     this.gridComp.generate();
   }
+
+  callExport(): void {
+    this.gridComp.export();
+  }
 }
 
 

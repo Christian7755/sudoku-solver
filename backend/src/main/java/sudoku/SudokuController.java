@@ -3,12 +3,22 @@ package sudoku;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sudoku.dto.SudokuRequest;
 import sudoku.dto.SudokuResponse;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+
+import org.springframework.http.ContentDisposition;
+import java.nio.charset.StandardCharsets;
+
+
 
 @RestController
 @RequestMapping("/api/sudoku")
@@ -17,6 +27,7 @@ import sudoku.dto.SudokuResponse;
 public class SudokuController {
     
     private final SudokuService sudokuService;
+    private final SudokuExporter sudokuExporter;
 
     @PostMapping("/solve")
     public ResponseEntity<SudokuResponse> solve(@Valid @RequestBody SudokuRequest request){
@@ -45,5 +56,21 @@ public class SudokuController {
             e.printStackTrace();
             return ResponseEntity.status(500).body(new SudokuResponse(null, false, e.getMessage()));
         }
+    }
+
+    @PostMapping(value = "/export", produces = "text/csv")
+    public ResponseEntity<byte[]> exportCsv(@Valid @RequestBody SudokuRequest request) {
+        int[][] grid = request.grid();
+        byte[] csvBytes = sudokuExporter.exportToCsv(grid);
+
+        HttpHeaders headers = new org.springframework.http.HttpHeaders();
+        headers.setContentType(new MediaType("text", "csv", StandardCharsets.UTF_8));
+        headers.setContentDisposition(
+            ContentDisposition.builder("attachment")
+                              .filename("sudoku.csv")
+                              .build()
+        );
+
+        return new ResponseEntity<>(csvBytes, headers, HttpStatus.OK);
     }
 }

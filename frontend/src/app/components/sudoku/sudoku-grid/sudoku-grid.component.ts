@@ -50,6 +50,23 @@ export class SudokuGridComponent implements OnInit {
     })
   }
 
+  /** Export-Handler */
+  export(): void {
+    this.api.exportCsv(this.grid).subscribe({
+      next: blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'sudoku.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      },
+      error: err => this.message = 'Fehler beim Export: ' + err.message
+    });
+  }
+
   //access a certain cell
   setCell(row: number, col: number, value: number): void {
     this.grid[row][col] = value;
