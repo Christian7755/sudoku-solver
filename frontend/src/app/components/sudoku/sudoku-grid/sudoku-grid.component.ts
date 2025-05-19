@@ -40,6 +40,16 @@ export class SudokuGridComponent implements OnInit {
     })
   }
 
+  generate(): void {
+    this.api.generate().subscribe({
+      next: res => {
+        this.grid = res.grid;
+        this.message = res.message;
+      },
+      error: err => this.message = 'Fehler: ' + err.message
+    })
+  }
+
   //access a certain cell
   setCell(row: number, col: number, value: number): void {
     this.grid[row][col] = value;

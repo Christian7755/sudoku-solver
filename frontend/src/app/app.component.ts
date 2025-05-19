@@ -24,6 +24,10 @@ export class AppComponent {
   callSolve(): void{
     this.gridComp.solve();
   }
+
+  callGenerate(): void{
+    this.gridComp.generate();
+  }
 }
 
 

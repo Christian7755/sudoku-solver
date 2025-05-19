@@ -10,14 +10,14 @@ public class SudokuApplication {
     public static void main(String[] args) {
         SpringApplication.run(SudokuApplication.class, args);
     }
-}
+    }
 
-/* winziger Smoke-Test-Controller */
-@RestController
-@RequestMapping("/api/ping")
-class PingController {
-    @GetMapping
-    public String pong() {
-        return "pong";
+    /* Smoke-Test Controller */
+    @RestController
+    @RequestMapping("/api/ping")
+    class PingController {
+        @GetMapping
+        public String pong() {
+            return "pong";
     }
 }

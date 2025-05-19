@@ -1,12 +1,9 @@
 package sudoku.jwt;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-
-
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -37,12 +34,21 @@ public class JwtUtil {
                 .compact();
     }
 
+    /**
+     * Validiert das Token und gibt den Username (Subject) zurück, wenn gültig.
+     * Gibt null zurück, wenn das Token ungültig oder abgelaufen ist.
+     */
     public String validateTokenAndRetrieveSubject(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        } catch (JwtException | IllegalArgumentException e) {
+            System.out.println("JWT-Fehler: " + e.getClass().getSimpleName() + " – " + e.getMessage());
+            return null;
+        }
     }
 }

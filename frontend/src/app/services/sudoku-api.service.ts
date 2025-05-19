@@ -17,4 +17,8 @@ export class SudokuApiService {
     solve(grid: number[][]): Observable<SudokuResponse> {
         return this.http.post<SudokuResponse>(`${this.baseUrl}/solve`, { grid });
     }
+
+    generate(): Observable<SudokuResponse> {
+        return this.http.get<SudokuResponse>(`${this.baseUrl}/generate`);
+    }
 }

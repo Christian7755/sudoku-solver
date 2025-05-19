@@ -53,7 +53,9 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 //Smoke Test
                 .requestMatchers(HttpMethod.GET, "/api/ping").permitAll()
-                .requestMatchers("/api/sudoku/solve/**").permitAll()
+                //Solving und Generating don't need auth
+                .requestMatchers("/api/sudoku/solve").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/sudoku/generate").permitAll()
                 // alles Weitere nur mit gültigem JWT
                 .anyRequest().authenticated());
 

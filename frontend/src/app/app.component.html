@@ -5,7 +5,7 @@
   <div id="buttons">
     <!-- Zeige 4 Buttons mit unterschiedlichen Texten -->
     <app-button [text]="'Import'"></app-button>
-    <app-button [text]="'Generate'"></app-button>
+    <app-button [text]="'Generate'" (click)="callGenerate()"></app-button>
     <app-button [text]="'Save'"></app-button>
     <app-button [text]="'Solve'" (click)="callSolve()"></app-button>
   </div>
