@@ -32,7 +32,7 @@ public class SecurityConfig {
             // CORS (wichtig für localhost:4200 → 8080)
             .cors(Customizer.withDefaults())
 
-            // CSRF brauchst du für reine Token-APIs nicht
+            // CSRF ist für reine Token-APIs nicht benötigt
             .csrf(csrf -> csrf.disable())
 
             // Jedes Request wird als stateless betrachtet
@@ -43,7 +43,7 @@ public class SecurityConfig {
             .formLogin(fl -> fl.disable())
             .httpBasic(basic -> basic.disable())
 
-            //401 statt 302
+            //401
             .exceptionHandling(e -> e
                  .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
             
@@ -61,7 +61,7 @@ public class SecurityConfig {
                 // alles Weitere nur mit gültigem JWT
                 .anyRequest().authenticated());
 
-        // Unser Filter VOR UsernamePasswordAuthenticationFilter einhängen
+        // Unser Filter einhängen
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

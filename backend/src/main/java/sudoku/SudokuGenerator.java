@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.lang.Character;
 import java.net.URI;
 
-import org.springframework.stereotype.Component;
 
 @Component
 public class SudokuGenerator {
 
     private final RestTemplate restTemplate;
 
+    //Rest Template um die Dosuku API aufzurufen und zu verwenden
     @Autowired
     public SudokuGenerator() {
         this.restTemplate = new RestTemplate();
@@ -19,6 +19,7 @@ public class SudokuGenerator {
 
     public int[][] generate() {
         try {
+            //Aufruf Dosuku API
             URI url = URI.create(
                 "https://sudoku-api.vercel.app/api/dosuku"
               + "?query=%7Bnewboard(limit:1)%7Bgrids%7Bvalue%7D%7D%7D"
@@ -27,7 +28,7 @@ public class SudokuGenerator {
             String raw = restTemplate.getForObject(url, String.class);
             System.out.println("RAW JSON:\n" + raw);
 
-            
+            //Validieren der Response
             ApiResponse response = restTemplate.getForObject(url, ApiResponse.class);
             if (response == null 
                             || response.getNewboard() == null
@@ -37,6 +38,7 @@ public class SudokuGenerator {
                 throw new IllegalStateException("Ungültige Antwort von Sudoku-API");
             }
 
+            //Rückgabe der entsprechenden Werte anhand der erforderten Struktur
             return response.getNewboard().getGrids()[0].getValue();
         } catch (Exception e) {
             System.out.println("Fehler beim Abrufen des Sudoku: " + e.getMessage());

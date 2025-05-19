@@ -12,7 +12,7 @@ import { AuthService } from './services/auth.service';
   standalone: false,
 })
 export class AppComponent {
-  title = 'my-angular-app';  // Beispiel-Property, die im Template verwendet werden kann
+  title = 'my-angular-app';  
 
   @ViewChild(SudokuGridComponent) gridComp!: SudokuGridComponent;
 
@@ -20,7 +20,7 @@ export class AppComponent {
 
 
   
-
+  //Aufrufe der Komponentenmethode zum Lösen des Sudokus
   callSolve(): void{
     this.gridComp.solve();
   }

@@ -23,6 +23,7 @@ import org.springframework.http.ContentDisposition;
 import java.io.IOException;
 
 
+//Sudoku-Controller. Used for all Http Requests concerning the sudoku
 @RestController
 @RequestMapping("/api/sudoku")
 @RequiredArgsConstructor
@@ -35,9 +36,11 @@ public class SudokuController {
 
     @PostMapping("/solve")
     public ResponseEntity<SudokuResponse> solve(@Valid @RequestBody SudokuRequest request){
+        //for debbuging
         System.out.println("SudokuController: Eingehender Request für solving empfangen!");
         System.out.println("Grid: " + Arrays.deepToString(request.grid()));
 
+        //the solved sudoku is added to a new sudoku response
         int[][] solvedGrid = sudokuService.solve(request.grid());
         var response = new SudokuResponse(
             solvedGrid,
@@ -62,6 +65,7 @@ public class SudokuController {
         }
     }
 
+    //for export of the current sudoku. 
     @PostMapping(value = "/export", produces = "text/csv")
     public ResponseEntity<byte[]> exportCsv(@Valid @RequestBody SudokuRequest request) {
         int[][] grid = request.grid();

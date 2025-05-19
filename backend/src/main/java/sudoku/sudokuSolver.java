@@ -7,6 +7,7 @@ public class SudokuSolver {
     
     public int[][] solve(int[][] grid) {
         
+        //Aufruf der Methode zum Rekursiven lösen, als erster Iterationsschritt
         if(!solveRecursive(grid)) {
             throw new IllegalArgumentException("Unlösbares oder Fehlerhaftes Sudoku-Startgitter");
         }
@@ -14,16 +15,22 @@ public class SudokuSolver {
         
     }
     
+
+    //Algorithmus zum rekursiven Lösen des Sudokus. Liefert Wahrheitswert zurück für Backtracking
     private boolean solveRecursive(int[][] grid){
         
+        //geht anhand der Zeilen und Spalten zur nächsten nicht belegten Zelle
         for(int row = 0; row < 9; row++){
             for (int col = 0; col < 9; col++){
                 if (grid[row][col] == 0){
+                    //Probieren der Werte von 1 bis 9
                     for (int val = 1; val <= 9; val++){
                         grid[row][col] = val;
+                        //Validieren und Rekursiver Aufruf um das Sudoku zu lösen
                         if (gridValidated(grid) && solveRecursive(grid)){
                             return true;
                         }
+                        //für das Backtracking: wenn die Varianten von 1-9 Fehlschlagen wird der Wert 0 gesetzt um einen Schritt zurückzugehen
                         grid[row][col] = 0;
                     }
                     return false;
@@ -32,39 +39,10 @@ public class SudokuSolver {
         }
 
         return true;
-
-        /*//nach der nächsten Zelle schauen
-        boolean getNextCell= false;
-        outer:
-        while (!getNextCell) {
-            for(int s= changedRowBefore; s < 9; s++){
-                for(int i = 0; i<9; i++){
-                    if(grid[s][i] == 0){
-                        changingRowNext = s;
-                        changingColumnNext = i;
-                        getNextCell= true;
-                        break outer;
-                    }
-                }
-            }   
-        }
-
-
-
-        //Zelle von 1 bis 9 - jeweils Aufruf zum Backtracken
-        for(int i = 1; i<10; i++){
-            grid[changingRowNext][changingColumnNext] = i;
-            if(gridValidated(grid)){
-                if(!sudokuSolved(grid)){
-                    solveNextStep(grid, changingRowNext, changingColumnNext);
-                }
-            }
-        }
-        return grid;*/
     }
 
 
-
+    //Prüft, ob das Sudoku gelöst ist. Liefert false, wenn ein Wert nicht vorhanden ist oder das Sudoku invalide ist
     private boolean sudokuSolved(int[][] grid) {
         if(gridValidated(grid)){
             for(int i = 0; i<9; i++){
@@ -79,6 +57,7 @@ public class SudokuSolver {
         return false;
     }
 
+    //Validiert das Gesamte Sudoku auf die Größe und die Einträge anhand der 3 Sudokuregeln.
     private boolean gridValidated(int[][] grid){
         if (grid.length != 9){
             throw new IllegalArgumentException("Grid muss 9 Zeilen haben");
@@ -90,6 +69,8 @@ public class SudokuSolver {
         }
         return validateRows(grid) && validateColumns(grid) && validateBoxes(grid);   
     }
+
+    //Validation der Reiheneinträge
     private boolean validateRows(int[][] g) {
         for (int i = 0; i < 9; i++) {
             boolean[] seen = new boolean[10];  // Index 1..9
@@ -104,6 +85,7 @@ public class SudokuSolver {
         return true;
     }
 
+    //Validation der Spalteneinträge
     private boolean validateColumns(int[][] g) {
         for (int j = 0; j < 9; j++) {
             boolean[] seen = new boolean[10];
@@ -118,6 +100,7 @@ public class SudokuSolver {
         return true;
     }
 
+    //Validation der 9 Kästen
     private boolean validateBoxes(int[][] g) {
         // 3×3-Kästen: Start bei (0,0), (0,3), (0,6), (3,0), ...
         for (int boxRow = 0; boxRow < 9; boxRow += 3) {

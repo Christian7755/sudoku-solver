@@ -94,6 +94,7 @@ export class SudokuGridComponent implements OnInit {
     return this.grid[row][col];
   }
 
+  //um den Wert der einzelnen Zelle upzudaten
   updateCell(event: { row: number, col: number, value: number}) {
     this.grid[event.row][event.col] = event.value;
 

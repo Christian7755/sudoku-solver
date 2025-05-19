@@ -13,11 +13,13 @@ export class SudokuApiService {
     : 'http://backend:8080/api/sudoku';
 
     constructor(private http: HttpClient) {}
-        
+    
+    //Post Request um das Sudoku zu lösen
     solve(grid: number[][]): Observable<SudokuResponse> {
         return this.http.post<SudokuResponse>(`${this.baseUrl}/solve`, { grid });
     }
 
+    //Get Request um Sudoku zu generieren
     generate(): Observable<SudokuResponse> {
         return this.http.get<SudokuResponse>(`${this.baseUrl}/generate`);
     }
