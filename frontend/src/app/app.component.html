@@ -4,7 +4,8 @@
   <app-sudoku-grid></app-sudoku-grid>
   <div id="buttons">
     <!-- Zeige 4 Buttons mit unterschiedlichen Texten -->
-    <app-button [text]="'Import'"></app-button>
+    <app-button [text]="'Import (CSV)'" (click)="openFileDialog()"></app-button>
+    <input type="file" #fileInput accept=".csv, text/csv" hidden (change)="onFileSelected($event)" /> 
     <app-button [text]="'Generate'" (click)="callGenerate()"></app-button>
     <app-button [text]="'Save'" (click)="callExport()"></app-button>
     <app-button [text]="'Solve'" (click)="callSolve()"></app-button>

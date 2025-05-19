@@ -26,4 +26,15 @@ export class SudokuApiService {
     exportCsv(grid: number[][]): Observable<Blob> {
         return this.http.post(`${this.baseUrl}/export`, { grid }, { responseType: 'blob'});
     }
+
+    /** Importiert ein CSV-File und gibt das neue Grid zurück */
+    importCsv(file: File): Observable<SudokuResponse> {
+    const form = new FormData();
+    form.append('file', file, file.name);
+    return this.http.post<SudokuResponse>(
+        `${this.baseUrl}/import`,
+        form
+    );
+    }
+
 }

@@ -7,6 +7,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import sudoku.dto.SudokuRequest;
 import sudoku.dto.SudokuResponse;
 import org.springframework.http.MediaType;
@@ -16,8 +18,9 @@ import org.springframework.http.ResponseEntity;
 
 
 import org.springframework.http.ContentDisposition;
-import java.nio.charset.StandardCharsets;
 
+
+import java.io.IOException;
 
 
 @RestController
@@ -28,6 +31,7 @@ public class SudokuController {
     
     private final SudokuService sudokuService;
     private final SudokuExporter sudokuExporter;
+    private final SudokuImporter sudokuImporter;
 
     @PostMapping("/solve")
     public ResponseEntity<SudokuResponse> solve(@Valid @RequestBody SudokuRequest request){
@@ -72,5 +76,25 @@ public class SudokuController {
         );
 
         return new ResponseEntity<>(csvBytes, headers, HttpStatus.OK);
+    }
+
+    /**
+     * Importiert ein Sudoku aus einer hochgeladenen CSV-Datei.
+     * Feld-Name muss "file" sein.
+     */
+    @PostMapping(
+        value = "/import",
+      consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<SudokuResponse> importCsv(@RequestPart("file") MultipartFile file) {
+        try {
+            int[][] grid = sudokuImporter.parseCsv(file);
+            return ResponseEntity.ok(new SudokuResponse(grid, true, "Import erfolgreich"));
+        } catch (IllegalArgumentException | IOException e) {
+            return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new SudokuResponse(null, false, "Import fehlgeschlagen: " + e.getMessage()));
+        }
     }
 }

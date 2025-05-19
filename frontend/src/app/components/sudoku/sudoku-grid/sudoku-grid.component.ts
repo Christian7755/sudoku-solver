@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SudokuApiService } from '../../../services/sudoku-api.service';
+import { SudokuApiService, SudokuResponse } from '../../../services/sudoku-api.service';
 
 @Component({
   selector: 'app-sudoku-grid',
@@ -64,6 +64,23 @@ export class SudokuGridComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       },
       error: err => this.message = 'Fehler beim Export: ' + err.message
+    });
+  }
+
+  /** Wird von der AppComponent aufgerufen */
+  public importCsvFile(file: File): void {
+    this.api.importCsv(file).subscribe({
+      next: (res: SudokuResponse) => {
+        if (res.solvable) {
+          this.grid = res.grid;
+          this.message = res.message;
+        } else {
+          this.message = 'Import fehlgeschlagen: ' + res.message;
+        }
+      },
+      error: err => {
+        this.message = 'Fehler beim Import: ' + (err.error?.message || err.message);
+      }
     });
   }
 

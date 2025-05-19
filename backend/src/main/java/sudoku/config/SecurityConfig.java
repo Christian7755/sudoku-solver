@@ -57,6 +57,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/sudoku/solve").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/sudoku/generate").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/sudoku/export").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/sudoku/import").permitAll()
                 // alles Weitere nur mit gültigem JWT
                 .anyRequest().authenticated());
 
