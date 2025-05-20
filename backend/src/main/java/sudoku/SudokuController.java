@@ -36,11 +36,11 @@ public class SudokuController {
 
     @PostMapping("/solve")
     public ResponseEntity<SudokuResponse> solve(@Valid @RequestBody SudokuRequest request){
-        //for debbuging
+        //fürs Debuggen
         System.out.println("SudokuController: Eingehender Request für solving empfangen!");
         System.out.println("Grid: " + Arrays.deepToString(request.grid()));
 
-        //the solved sudoku is added to a new sudoku response
+        //das gelöste Sudoku wird zur Response hinzugefügt
         int[][] solvedGrid = sudokuService.solve(request.grid());
         var response = new SudokuResponse(
             solvedGrid,
@@ -65,7 +65,7 @@ public class SudokuController {
         }
     }
 
-    //for export of the current sudoku. 
+    //um das Sudoku zu exportieren 
     @PostMapping(value = "/export", produces = "text/csv")
     public ResponseEntity<byte[]> exportCsv(@Valid @RequestBody SudokuRequest request) {
         int[][] grid = request.grid();

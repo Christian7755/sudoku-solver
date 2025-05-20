@@ -84,12 +84,12 @@ export class SudokuGridComponent implements OnInit {
     });
   }
 
-  //access a certain cell
+  //Setter für die einzelne Zelle
   setCell(row: number, col: number, value: number): void {
     this.grid[row][col] = value;
   }
 
-  //Getting a certain cell
+  //Getter für die einzelne Zelle
   getCell(row: number, col: number): number {
     return this.grid[row][col];
   }

@@ -1,7 +1,7 @@
 package sudoku.dto;
 
 
-//Sudoku Response- used for returning solved or generated sudokus
+//Sudoku Response- um generierte oder gelöste Sudokus zurückzugeben
 public record SudokuResponse(
     int[][] grid,
     boolean solvable,
