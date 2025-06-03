@@ -22,6 +22,16 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody AuthRequest req) {
 
+        //for Debbuging
+        System.out.println("Angekommen mit: " + req);
+        if (req != null) {
+        System.out.println("Username: " + req.username());
+        System.out.println("Passwort: " + req.password());
+        } else {
+            System.out.println("Request ist null!");
+        }
+
+
         String stored = authProps.getUsers().get(req.username());
         boolean ok = stored != null && encoder.matches(req.password(), stored);
 

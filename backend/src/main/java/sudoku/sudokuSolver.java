@@ -30,7 +30,7 @@ public class SudokuSolver {
                         if (gridValidated(grid) && solveRecursive(grid)){
                             return true;
                         }
-                        //für das Backtracking: wenn die Varianten von 1-9 Fehlschlagen wird der Wert 0 gesetzt um einen Schritt zurückzugehen
+                        //für das Backtracking: wenn die Varianten von 1-9 Fehlschlagen wird der Wert 0 gesetzt um einen Schritt zurückzugehen  
                         grid[row][col] = 0;
                     }
                     return false;

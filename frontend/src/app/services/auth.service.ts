@@ -15,17 +15,12 @@ export class AuthService {
    * und gibt ihn (als Observable) an den Aufrufer zurück.
    */
   login(username: string, password: string): Observable<string> {
-    const body =
-      `username=${encodeURIComponent(username)}` +
-      `&password=${encodeURIComponent(password)}`;
+    const body = { username, password };
 
-    const headers = new HttpHeaders()
-                      .set('Content-Type', 'application/x-www-form-urlencoded');
 
     /* <------  KEIN tap – wir verpacken den Aufruf in ein eigenes Observable */
     return new Observable<string>(observer => {
       this.http.post(this.baseUrl + '/login', body, {
-          headers,
           responseType: 'text'        // ← Token kommt als Klartext (string)
       }).subscribe({
         next: token => {
