@@ -1,4 +1,6 @@
 # sudoku-solver
+Erlaubt das Generieren, Importieren, Exportieren, Lösen von und Spielen mit Sudokus. Die Benutzerverwaltung erlaubt die Stats zu sichern. 
+
 
 # Mein Projekt: Frontend (Angular) und Backend (Spring Boot)
 
@@ -12,36 +14,25 @@
 1. Klone das Repository:
    ```bash
    git clone <repository-url>
-   cd my-project
 
-2. Frontend Starten:
-   cd frontend
-   npm install
-   npm start
-
-Die Anwendung sollte unter http://localhost4200 sichtbar sein.
-
-3. Backend Starten
-   cd backend
-   ./mvnw clean install
-   ./mfnw spring-boot:run
-
-4. Beide Anwendungen Starten
-   cd sudoku-solver (Hauptverzeichnis)
+2. Anwendung starten
+   cd sudoku-solver  
    docker-compose up --build
 
-Das Backend ist unter http://localhost:8080 verfügbar
+3. Aufruf
+   Die Anwendung sollte unter http://localhost4200 sichtbar sein.
+
+   Das Backend läuft unter http://localhost:8080 
+
+## Login, User Stats
+Konfigurierter Testnutzer für die Abgabe:
+Nutzer: demo
+Passwort: demo123
+
+Der Login ist für den Play-Mode erforderlich.
+Hierbei werden die User-Stats gesichert.
 
 
+## Verwendung von externen APIs
+- Dosuku API: Generieren von Sudokus
 
-Eventuell Paktet für Tests:
-npm install --save-dev @types/jasmine jasmine-core karma karma-chrome-launcher karma-jasmine karma-jasmine-html-reporter
-npm install --save-dev karma karma-jasmine karma-chrome-launcher karma-jasmine-html-reporter
-npm install --save-dev karma-coverage
-
-npm install zone.js --save
-
-npm install @angularclass/hmr --save-dev
-
-
-Erweiterung Dosuku API, eventuell JWT
