@@ -9,6 +9,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { PlayComponent } from './play/play.component';
+import { PlayLoginComponent } from './play-login/play-login.component';
 
 @NgModule({
 declarations: [
@@ -20,8 +22,11 @@ declarations: [
     BrowserModule,
     ButtonComponent,
     FormsModule,
-    LoginComponent
+    LoginComponent,
+    PlayComponent,
+    PlayLoginComponent
   ],
+  exports: [SudokuGridComponent],
   providers: [provideHttpClient() ,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent] 
 })

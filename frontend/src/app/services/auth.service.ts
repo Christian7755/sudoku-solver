@@ -38,6 +38,12 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  /** Gibt true zurück, wenn ein Token vorhanden ist */
+  isLoggedIn(): boolean {
+    return this.getToken() !== null;
+  }
+
+
   /** Entfernt den Token wieder. */
   logout(): void {
     localStorage.removeItem('token');

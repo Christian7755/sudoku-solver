@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ButtonComponent } from './components/button/button.component';
 import { SudokuGridComponent } from './components/sudoku/sudoku-grid/sudoku-grid.component';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -16,7 +17,7 @@ export class AppComponent {
 
   @ViewChild(SudokuGridComponent) gridComp!: SudokuGridComponent;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, public router: Router) {}
 
 
   
