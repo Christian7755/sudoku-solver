@@ -12,9 +12,11 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
+        console.log("ist Logged in");
       return true;
     }
     this.router.navigate(['/play-login']);
+    console.log("is not logged in");
     return false;
   }
 }

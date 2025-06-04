@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Token } from '@angular/compiler';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -33,6 +34,17 @@ export class AuthService {
     });
   }
 
+  private isTokenExpired(token: String): boolean {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const expiry = payload.exp;
+      const now = Math.floor(Date.now() / 1000);
+      return now > expiry;
+    } catch (e) {
+      return true;
+    }
+  }
+
   /** Gibt den aktuell gespeicherten Token zurück (oder null). */
   getToken(): string | null {
     return localStorage.getItem('token');
@@ -40,7 +52,13 @@ export class AuthService {
 
   /** Gibt true zurück, wenn ein Token vorhanden ist */
   isLoggedIn(): boolean {
-    return this.getToken() !== null;
+    console.log("Nutzer wird geprüft" + localStorage.getItem('token'));
+    const token = this.getToken();
+    if (!token || this.isTokenExpired(token)) {
+      this.logout();
+      return false;
+    }
+    return true;
   }
 
 
