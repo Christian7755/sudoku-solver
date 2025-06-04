@@ -1,15 +1,1 @@
-<app-login></app-login>
-<hr>
-<div class="container_main">
-  <app-sudoku-grid></app-sudoku-grid>
-  <div id="buttons">
-    <!-- Buttons mit verschiedenen implementierten Funktionen -->
-    <app-button [text]="'Import (CSV)'" (click)="openFileDialog()"></app-button>
-    <!-- verstecktes Input Feld um die CSV Datei zu importieren-->
-    <input type="file" #fileInput accept=".csv, text/csv" hidden (change)="onFileSelected($event)" /> 
-    <app-button [text]="'Generate'" (click)="callGenerate()"></app-button>
-    <app-button [text]="'Save'" (click)="callExport()"></app-button>
-    <app-button [text]="'Solve'" (click)="callSolve()"></app-button>
-    <app-button [text]="'Play!!!'" (click)="router.navigate(['/play-login'])"></app-button>
-  </div>
-</div>
+<router-outlet></router-outlet>

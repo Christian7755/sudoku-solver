@@ -11,20 +11,24 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { PlayComponent } from './play/play.component';
 import { PlayLoginComponent } from './play-login/play-login.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
 declarations: [
     AppComponent,
     SudokuGridComponent,
     SudokuCellComponent,
+    PlayComponent,
+    HomeComponent
 ],
   imports: [
     BrowserModule,
     ButtonComponent,
     FormsModule,
     LoginComponent,
-    PlayComponent,
-    PlayLoginComponent
+    PlayLoginComponent,
+    AppRoutingModule,
   ],
   exports: [SudokuGridComponent],
   providers: [provideHttpClient() ,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],

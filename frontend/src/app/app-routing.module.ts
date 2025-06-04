@@ -5,11 +5,12 @@ import { PlayComponent } from "./play/play.component";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "./auth/auth.guard";
+import { HomeComponent } from "./home/home.component";
 
 const routes: Routes = [
-    { path: '', component: AppComponent},
-    { path: '/play-login', component: PlayLoginComponent},
-    { path: '/play', component: PlayComponent, canActivate: [AuthGuard] },
+    { path: '', component: HomeComponent},
+    { path: 'play-login', component: PlayLoginComponent},
+    { path: 'play', component: PlayComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

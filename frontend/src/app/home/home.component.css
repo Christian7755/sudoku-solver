@@ -1,0 +1,21 @@
+#buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.container_main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 20px
+}
+
+@media (max-width: 768px) {
+    .container_main {
+        flex-direction: column;
+    }
+
+    #buttons {
+        flex-direction: row;
+    }
+}
