@@ -48,4 +48,8 @@ export class HomeComponent {
     const file = input.files[0];
     this.gridComp.importCsvFile(file);
   }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 }

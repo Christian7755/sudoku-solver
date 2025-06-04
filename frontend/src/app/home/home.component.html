@@ -1,4 +1,5 @@
-<app-login></app-login>
+<app-login *ngIf="!isLoggedIn()"></app-login>
+<app-logout *ngIf="isLoggedIn()"></app-logout>
 <hr>
 <div class="container_main">
   <app-sudoku-grid></app-sudoku-grid>

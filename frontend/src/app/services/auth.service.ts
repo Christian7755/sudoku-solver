@@ -64,6 +64,7 @@ export class AuthService {
 
   /** Entfernt den Token wieder. */
   logout(): void {
+    console.log("Is Logged out")
     localStorage.removeItem('token');
   }
 }

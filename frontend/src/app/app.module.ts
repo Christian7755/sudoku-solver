@@ -13,6 +13,7 @@ import { PlayComponent } from './play/play.component';
 import { PlayLoginComponent } from './play-login/play-login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
 declarations: [
@@ -27,6 +28,7 @@ declarations: [
     ButtonComponent,
     FormsModule,
     LoginComponent,
+    LogoutComponent,
     PlayLoginComponent,
     AppRoutingModule,
   ],
