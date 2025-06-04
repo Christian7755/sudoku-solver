@@ -1,0 +1,36 @@
+#buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.container_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 20px;
+    max-width: 1em;
+}
+
+/* needs do be adapted */
+#quit-button {
+    color: red;
+}
+
+#pause-button {
+    --button-bg: gold;
+    --button-color: black;
+}
+
+@media (max-width: 768px) {
+    .container_buttons {
+        flex-direction: column;
+    }
+
+    #buttons {
+        flex-direction: row;
+    }
+}
+
+h1 {
+    color: blueviolet;
+}

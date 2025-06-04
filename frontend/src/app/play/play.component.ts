@@ -4,7 +4,7 @@ import { SudokuGridComponent } from '../components/sudoku/sudoku-grid/sudoku-gri
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
-  styleUrl: './play.component.css',
+  styleUrls: ['./play.component.css'],
   standalone: false
 })
 export class PlayComponent {
