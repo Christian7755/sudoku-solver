@@ -36,3 +36,5 @@ Hierbei werden die User-Stats gesichert.
 ## Verwendung von externen APIs
 - Dosuku API: Generieren von Sudokus
 
+## Weitere Infos zum Projekt
+- Verwendung von Sring-Security mit H2

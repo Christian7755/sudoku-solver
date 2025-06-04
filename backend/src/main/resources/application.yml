@@ -1,15 +1,24 @@
-# src/main/resources/application.yml
 jwt:
   secret: "meinGeheimerSchluesselDerMindestens32ZeichenLangIst"
   expirationMinutes: 5000
 
-# >>> alle Demo-User liegen jetzt hier
 auth:
   users:
     admin: "{bcrypt}$2a$10$K1l4l/5O7Sx0A8g6k2RcAuQcgV2k.ePxQStg5DoubleuK9Ke6hOtW"
-    demo: "{noop}demo123"         # bleibt zum Testen Klartext
-
+    demo: "{noop}demo123"
 
 logging:
   level:
     org.springframework.security: DEBUG
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true

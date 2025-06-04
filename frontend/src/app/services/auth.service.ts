@@ -61,6 +61,14 @@ export class AuthService {
     return true;
   }
 
+  getUsername(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.sub;
+  }
+
 
   /** Entfernt den Token wieder. */
   logout(): void {

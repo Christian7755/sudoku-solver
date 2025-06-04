@@ -1,1 +1,13 @@
-<p>stats works!</p>
+<div *ngIf="stats.length > 0; else noStats">
+  <h3>Deine Spielstatistiken</h3>
+  <ul>
+    <li *ngFor="let stat of stats">
+      Start: {{ stat.startTime }} | Ende: {{ stat.endTime }} | 
+      Ergebnis: {{ stat.completed ? '✔ Erfolgreich' : '❌ Aufgegeben' }}
+    </li>
+  </ul>
+</div>
+<ng-template #noStats>
+  <p>Keine Statistikdaten vorhanden.</p>
+</ng-template>
+
