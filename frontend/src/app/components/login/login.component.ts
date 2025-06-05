@@ -29,6 +29,7 @@ export class LoginComponent {
         this.message = '✅ eingeloggt';
         if (this.redirectAfterLogin) {
           this.router.navigate([this.redirectTo]);
+          window.location.reload();
         }
       },
       error: err => {
