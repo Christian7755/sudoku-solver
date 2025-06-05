@@ -13,6 +13,8 @@ export class SudokuGridComponent implements OnInit {
   
   grid: { value: number; changeable: boolean}[][] = [];
 
+  focusedRow: number | null = null;
+  focusedCol: number | null = null;
   message = '';
 
   ngOnInit(): void {
@@ -94,6 +96,27 @@ export class SudokuGridComponent implements OnInit {
 
     console.log("Sudoku-Grid: update cell col" + event.col + " and row " + event.row + " with value " + event.value );
   }
+
+  onFocus(row: number, col: number): void {
+    this.focusedRow = row;
+    this.focusedCol = col;
+  }
+
+  moveFocus(event: { rowOffset: number, colOffset: number }): void {
+    if (this.focusedRow === null || this.focusedCol === null) return;
+    const newRow = (this.focusedRow + event.rowOffset + 9) % 9;
+    const newCol = (this.focusedCol + event.colOffset + 9) % 9;
+    this.focusToCell(newRow, newCol);
+  }
+
+  private focusToCell(row: number, col: number): void {
+    setTimeout(() => {
+      const selector = `.row-${row}.col-${col} input`;
+      const input = document.querySelector<HTMLInputElement>(selector);
+      input?.focus();
+    });
+  }
+
 
   trackByIndex(index: number): number {return index; }
 

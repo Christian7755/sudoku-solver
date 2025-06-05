@@ -1,11 +1,17 @@
-<!-- Input Feld mit Validierung-->
+<!-- Einzelne Zelle -->
 <div class="sudoku-cell"
     [ngClass]="['row-' + row, 'col-' + col, !changeable ? 'fixed-cell' : '']">
-    <input class ="sudoku-cell-input" 
-    type="number" 
-    [(ngModel)]="value" 
-    (change)="onCellChange(+value)"
+
+  <input class="sudoku-cell-input" 
+    type="text"
+    [value]="value === 0 ? '' : value"
+    maxlength="1"
+    pattern="[1-9]"
+    (input)="onInput($event)"
+    (keydown)="onKeyDown($event)"
+    (keypress)="onKeyPress($event)"
+    (focus)="onFocus()"
     [readonly]="!changeable"
     [class.read-only]="!changeable"
-    min="0" max="9" />
+  />
 </div>

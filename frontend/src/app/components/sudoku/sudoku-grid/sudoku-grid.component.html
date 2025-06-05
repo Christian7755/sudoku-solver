@@ -7,7 +7,9 @@
                      [col]="colIndex"
                      [value]="cell.value"
                      [changeable]="cell.changeable"
-                     (cellUpdated)="updateCell($event)">
+                      (cellUpdated)="updateCell($event)"
+                      (moveFocus)="moveFocus($event)"
+                      (focus)="onFocus(rowIndex, colIndex)">
     </app-sudoku-cell>
   </div>
 </div>
