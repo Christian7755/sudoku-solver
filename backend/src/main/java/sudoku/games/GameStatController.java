@@ -20,6 +20,8 @@ public class GameStatController {
     @PostMapping("/start")
     public GameStat startGame(@RequestBody String username) {
         GameStat stat = new GameStat();
+        System.out.println("Backend: Game Started with id:" + stat.getId());
+
         stat.setUsername(username);
         stat.setStartTime(LocalDateTime.now());
         return repository.save(stat);
@@ -28,6 +30,8 @@ public class GameStatController {
     @PostMapping("/end/{id}")
     public GameStat endGame(@PathVariable Long id, @RequestBody boolean completed) {
         GameStat stat = repository.findById(id).orElseThrow();
+
+        System.out.println("Backend Game ended with id: "+ stat.getId());
         stat.setEndTime(LocalDateTime.now());
         stat.setCompleted(completed);
         return repository.save(stat);

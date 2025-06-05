@@ -8,7 +8,7 @@
     <app-button [text]="'Import (CSV)'" (click)="openFileDialog()"></app-button>
     <!-- verstecktes Input Feld um die CSV Datei zu importieren-->
     <input type="file" #fileInput accept=".csv, text/csv" hidden (change)="onFileSelected($event)" /> 
-    <app-button [text]="'Generate'" (click)="callGenerate()"></app-button>
+    <!--<app-button [text]="'Generate'" (click)="callGenerate()"></app-button>-->
     <app-button [text]="'Save'" (click)="callExport()"></app-button>
     <app-button [text]="'Solve'" (click)="callSolve()"></app-button>
     <app-button [text]="'Play!!!'" (click)="router.navigate(['/play'])"></app-button>

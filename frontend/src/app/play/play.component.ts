@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { SudokuGridComponent } from '../components/sudoku/sudoku-grid/sudoku-grid.component';
 
 @Component({
   selector: 'app-play',
@@ -12,9 +13,15 @@ export class PlayComponent {
   
   constructor(private authService: AuthService, private http: HttpClient){}
   
+   @ViewChild(SudokuGridComponent) gridComp!: SudokuGridComponent;
   gameId!: number;
 
+  ngAfterViewInit(): void {
+    this.startGame();
+  }
+
   startGame(): void {
+    this.gridComp.generate();
     const username = this.authService.getUsername();
     this.http.post<number>('http://localhost:8080/api/stats/start', username, {
       headers: { 'Content-Type': 'application/json'}

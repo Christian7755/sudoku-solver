@@ -65,8 +65,16 @@ export class AuthService {
     const token = this.getToken();
     if (!token) return null;
 
-    const payload = JSON.parse(atob(token.split('.')[1]));
-    return payload.sub;
+    try {
+    const payloadBase64 = token.split('.')[1];
+    const payloadJson = atob(payloadBase64);
+    const payload = JSON.parse(payloadJson);
+
+    return payload?.sub || null;
+    } catch (e) {
+      console.error('Ungültiges Token:', e);
+      return null;
+    }
   }
 
 

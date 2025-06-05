@@ -5,8 +5,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { SudokuGridComponent } from './components/sudoku/sudoku-grid/sudoku-grid.component';
 import { SudokuCellComponent } from './components/sudoku/sudoku-cell/sudoku-cell.component';
 import { FormsModule } from '@angular/forms';
-import { provideHttpClient } from '@angular/common/http';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { PlayComponent } from './play/play.component';
@@ -32,10 +31,11 @@ declarations: [
     LogoutComponent,
     PlayLoginComponent,
     AppRoutingModule,
-    StatsComponent
+    StatsComponent, 
+    HttpClientModule
   ],
   exports: [SudokuGridComponent],
-  providers: [provideHttpClient() ,{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent] 
 })
 export class AppModule { }
