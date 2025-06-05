@@ -14,5 +14,6 @@ export class LogoutComponent {
   logout(): void {
     console.log("Dies ist ein Test");
     this.auth.logout();
+    window.location.reload();
   }
 }
