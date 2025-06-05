@@ -34,3 +34,18 @@
 h1 {
     color: blueviolet;
 }
+
+
+.blink-success {
+  color: blueviolet;
+  font-size: 2rem;
+  font-weight: bold;
+  animation: blink 1s step-start infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SudokuApiService, SudokuResponse } from '../../../services/sudoku-api.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { SudokuApiService, SudokuResponse } from '../../../services/sudoku-api.s
 
 export class SudokuGridComponent implements OnInit {
   
+  //Output um zu Überprüfungen machen zu können, wenn Änderungen erfolgt sind. Z.B. Im Play Mode ob das Spiel beendet ist
+  @Output() cellChanged = new EventEmitter<{value: number; changeable: boolean}[][]>();
   
   grid: { value: number; changeable: boolean}[][] = [];
 
@@ -104,6 +106,8 @@ export class SudokuGridComponent implements OnInit {
     }
 
     this.grid[event.row][event.col].value = event.value;
+
+    this.cellChanged.emit(this.grid);
     console.log("Sudoku-Grid: update cell col" + event.col + " and row " + event.row + " with value " + event.value );
   }
 

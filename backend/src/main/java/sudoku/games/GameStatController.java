@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +19,15 @@ public class GameStatController {
     private GameStatRepository repository;
 
     @PostMapping("/start")
-    public GameStat startGame(@RequestBody String username) {
+    public ResponseEntity<Long> startGame(@RequestBody String username) {
         GameStat stat = new GameStat();
         System.out.println("Backend: Game Started with id:" + stat.getId());
 
         stat.setUsername(username);
         stat.setStartTime(LocalDateTime.now());
-        return repository.save(stat);
+        GameStat saved = repository.save(stat);
+
+        return ResponseEntity.ok(saved.getId());
     }
 
     @PostMapping("/end/{id}")

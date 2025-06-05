@@ -58,6 +58,12 @@ public class SudokuController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/validate")
+    public ResponseEntity<Boolean> validateSolution(@RequestBody SudokuRequest request){
+        boolean isSolved = sudokuService.validate(request.grid());
+        return ResponseEntity.ok(isSolved);
+    }
+
     @GetMapping("/generate")
     public ResponseEntity<SudokuResponse> generate(){
         System.out.println("SudokuController: Eingehender Request für generate empfangen!");

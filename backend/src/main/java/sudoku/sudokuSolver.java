@@ -5,6 +5,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class SudokuSolver {
     
+    public boolean validate(int[][]grid) {
+        if(gridValidated(grid) && sudokuSolved(grid)) {
+            return true;
+        }
+        return false;
+    }
+
     public int[][] solve(int[][] grid) {
         
         //Aufruf der Methode zum Rekursiven lösen, als erster Iterationsschritt

@@ -18,4 +18,7 @@ public class SudokuService {
     public int[][] generate(){
         return generator.generate();
     }
+    public boolean validate(int[][] grid){
+        return solver.validate(grid);
+    }
 }

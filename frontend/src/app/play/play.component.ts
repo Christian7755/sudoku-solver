@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { SudokuGridComponent } from '../components/sudoku/sudoku-grid/sudoku-grid.component';
 import { Router } from '@angular/router';
+import { SudokuRequest } from '../services/sudoku-api.service';
 
 @Component({
   selector: 'app-play',
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class PlayComponent {
-  
+  gameEnded: boolean = false;
+  gameSuccessful: boolean = false;
+
   constructor(private authService: AuthService, private http: HttpClient, public router: Router){}
   
    @ViewChild(SudokuGridComponent) gridComp!: SudokuGridComponent;
@@ -29,11 +32,52 @@ export class PlayComponent {
     }).subscribe(id =>this.gameId = id);
   }
 
+
+  //Wenn der Nutzer einzelne Werte im Sudoku eingibt, soll geprüft werden, ob er dies erfolgreich gelöst hat
+  onCellChanged(grid: {value: number; changeable: boolean}[][]): void {
+    //for Debugging
+    console.log("Cell Changed: check in Play COmponent");
+    const isComplete = grid.every(row => row.every(cell => cell.value !== 0));
+    if(!isComplete) return;
+
+    const numberGrid: number [][] = grid.map(row => row.map(cell => cell.value));
+    const changeableGrid: boolean[][] = grid.map(row => row.map(cell => cell.changeable));
+
+    const request: SudokuRequest = {
+      grid: numberGrid,
+      changeable: changeableGrid
+    }
+
+    this.http.post<SudokuRequest>('http://localhost:8080/api/sudoku/validate', request, {
+      headers: { 'Content-Type': 'application/json'}
+    }).subscribe({
+      next: isSolved => {
+        if (isSolved){
+          this.gameSuccessful = true;
+          this.endGame(true);
+        }
+      }
+    })
+  }
+
+  //Für das Aufgaben oder das Erforlgreiche Abschließen von einnem Spiel
   endGame(success: boolean): void {
+    console.log("Kommt man so weit, dass das Spiel beendet wird?");
     if (!this.gameId) return;
      this.http.post(`http://localhost:8080/api/stats/end/${this.gameId}`, success, {
     headers: { 'Content-Type': 'application/json' }
   }).subscribe();
-  this.router.navigate(['']);
+  this.gameEnded = true;
+  if(!success){
+    this.router.navigate(['']);
+  }
+  }
+
+  return(): void {
+    this.router.navigate(['']);
+  }
+
+  newGame(): void {
+    window.location.reload();
   }
 }

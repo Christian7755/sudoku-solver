@@ -1,8 +1,11 @@
-<h1>Game-Mode: How long do you take?</h1>
+<h1 *ngIf="!gameSuccessful">Game-Mode: How long do you take?</h1>
+<h1 *ngIf="gameSuccessful" class="blink-success" >🎉 Congrats, you've made it! 🎉</h1>
 <div id="main-field">
-    <app-sudoku-grid></app-sudoku-grid>
+    <app-sudoku-grid (cellChanged)="onCellChanged($event)"></app-sudoku-grid>
     <div class="container_buttons">
-        <app-button id="quit-button" [text]="'Quit'" (click)="endGame(false)"></app-button>
-        <app-button id="pause-button" [text]="'Pause'">Pause</app-button>
+        <app-button *ngIf ="!gameSuccessful" id="quit-button" [text]="'Quit'" (click)="endGame(false)"></app-button>
+        <app-button *ngIf ="!gameSuccessful" id="pause-button" [text]="'Pause'"></app-button>
+        <app-button *ngIf ="gameSuccessful" id="return-Button" [text]="'Return'" (click)="return()"></app-button>
+        <app-button *ngIf ="gameSuccessful" id="new-game-button" [text]="'New Game'" (click)="newGame()" ></app-button>
     </div>
 </div>
