@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { SudokuGridComponent } from '../components/sudoku/sudoku-grid/sudoku-grid.component';
@@ -79,5 +79,15 @@ export class PlayComponent {
 
   newGame(): void {
     window.location.reload();
+  }
+
+
+  //Für einen Nutzerhinweis, wenn er das Fenster schließen oder aktualisieren will
+  @HostListener('window:beforeunload', ['$event'])
+  handleBeforeUnload(event: BeforeUnloadEvent) {
+    if (!this.gameEnded && this.gameId) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
   }
 }
