@@ -32,6 +32,7 @@ declarations: [
     PlayLoginComponent,
     AppRoutingModule,
     StatsComponent, 
+    //Auch wenn depricated, ist HTTPCientModule im gegensatz zu provideHttpClient Kompatibel mit dem Modularen Ansatz in diesem Projekt
     HttpClientModule
   ],
   exports: [SudokuGridComponent],
