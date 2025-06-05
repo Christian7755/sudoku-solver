@@ -21,6 +21,14 @@
     --button-color: black;
 }
 
+.main-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    justify-content: left;
+}
+
+
 @media (max-width: 768px) {
     .container_buttons {
         flex-direction: column;
@@ -49,3 +57,24 @@ h1 {
     opacity: 0;
   }
 }
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(240, 240, 240, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.overlay .message {
+  font-size: 2rem;
+  color: #555;
+  font-weight: bold;
+}
+

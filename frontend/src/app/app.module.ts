@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { StatsComponent } from './components/stats/stats.component';
+import { ClockComponent } from './components/clock/clock.component';
 
 @NgModule({
 declarations: [
@@ -32,6 +33,7 @@ declarations: [
     PlayLoginComponent,
     AppRoutingModule,
     StatsComponent, 
+    ClockComponent,
     //Auch wenn depricated, ist HTTPCientModule im gegensatz zu provideHttpClient Kompatibel mit dem Modularen Ansatz in diesem Projekt
     HttpClientModule
   ],

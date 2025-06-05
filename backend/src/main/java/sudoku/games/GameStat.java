@@ -18,12 +18,13 @@ public class GameStat {
     @GeneratedValue
     private long id;
 
-    
     private String username;
 
     private LocalDateTime startTime;
     
     private LocalDateTime endTime;
+
+    private int timeUsed;
     
     private boolean completed;
 

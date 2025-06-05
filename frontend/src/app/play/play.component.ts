@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { SudokuGridComponent } from '../components/sudoku/sudoku-grid/sudoku-grid.component';
 import { Router } from '@angular/router';
 import { SudokuRequest } from '../services/sudoku-api.service';
+import { ClockComponent } from '../components/clock/clock.component';
 
 @Component({
   selector: 'app-play',
@@ -17,7 +18,15 @@ export class PlayComponent {
 
   constructor(private authService: AuthService, private http: HttpClient, public router: Router){}
   
-   @ViewChild(SudokuGridComponent) gridComp!: SudokuGridComponent;
+  @ViewChild('clock') clockComp!: ClockComponent;
+  pauseOverlay: boolean = false;
+
+  togglePause(): void {
+    this.pauseOverlay = !this.pauseOverlay;
+    this.clockComp.pause();
+  }
+
+  @ViewChild(SudokuGridComponent) gridComp!: SudokuGridComponent;
   gameId!: number;
 
   ngAfterViewInit(): void {
@@ -63,14 +72,22 @@ export class PlayComponent {
   //Für das Aufgaben oder das Erforlgreiche Abschließen von einnem Spiel
   endGame(success: boolean): void {
     console.log("Kommt man so weit, dass das Spiel beendet wird?");
+
     if (!this.gameId) return;
-     this.http.post(`http://localhost:8080/api/stats/end/${this.gameId}`, success, {
-    headers: { 'Content-Type': 'application/json' }
-  }).subscribe();
-  this.gameEnded = true;
-  if(!success){
-    this.router.navigate(['']);
-  }
+
+    const secondsUsed = this.clockComp.getTimeInSeconds() ?? 0;
+
+    this.http.post(`http://localhost:8080/api/stats/end/${this.gameId}`, {
+      completed: success,
+      timeUsed: secondsUsed
+    }, {
+      headers: { 'Content-Type': 'application/json' }
+    }).subscribe();
+    
+    this.gameEnded = true;
+    if(!success){
+      this.router.navigate(['']);
+    }
   }
 
   return(): void {

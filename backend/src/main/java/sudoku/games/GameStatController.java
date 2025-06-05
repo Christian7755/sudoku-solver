@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import sudoku.dto.EndGameDTO;
+
 @RestController
 @RequestMapping("/api/stats")
 public class GameStatController {
@@ -31,12 +33,13 @@ public class GameStatController {
     }
 
     @PostMapping("/end/{id}")
-    public GameStat endGame(@PathVariable Long id, @RequestBody boolean completed) {
+    public GameStat endGame(@PathVariable Long id, @RequestBody EndGameDTO dto) {
         GameStat stat = repository.findById(id).orElseThrow();
 
         System.out.println("Backend Game ended with id: "+ stat.getId());
         stat.setEndTime(LocalDateTime.now());
-        stat.setCompleted(completed);
+        stat.setCompleted(dto.completed);
+        stat.setTimeUsed(dto.timeUsed);
         return repository.save(stat);
     }
 
