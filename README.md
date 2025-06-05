@@ -13,7 +13,7 @@ Erlaubt das Generieren, Importieren, Exportieren, Lösen von und Spielen mit Sud
 
 1. Klone das Repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Christian7755/sudoku-solver.git
 
 2. Anwendung starten
    cd sudoku-solver  
@@ -36,6 +36,6 @@ Hierbei werden die User-Stats gesichert.
 ## Verwendung von externen APIs
 - Dosuku API: Generieren von Sudokus
 
-
 ## Anwendung
 - Navigation innerhalb eines Sudokus: Pfeiltasten oder Zellen mit der Maus auswählen
+- Die Gesamtstatistiken können auf der Startseite angesehen werden, wenn der Nutzer eingeloggt ist
