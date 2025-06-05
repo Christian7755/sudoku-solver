@@ -17,6 +17,10 @@ export class SudokuGridComponent implements OnInit {
   focusedCol: number | null = null;
   message = '';
 
+  //Validation for User Input
+  validationMessage = '';
+  validationTimout: any;
+
   ngOnInit(): void {
     this.grid = Array.from({ length: 9 }, () =>
       Array.from({ length: 9 }, () => ({ value: 0, changeable: true }))
@@ -92,8 +96,14 @@ export class SudokuGridComponent implements OnInit {
 
   //um den Wert der einzelnen Zelle upzudaten
   updateCell(event: { row: number, col: number, value: number}) {
-    this.grid[event.row][event.col].value = event.value;
+    this.clearValidationMessage();
 
+    //Der User-Input wird validiert um sicherzustellen, dass er mit den Sudoku-Regeln Kopatibel ist
+    if (this.isMoveInvalid(event.row, event.col, event.value)) {
+      return;
+    }
+
+    this.grid[event.row][event.col].value = event.value;
     console.log("Sudoku-Grid: update cell col" + event.col + " and row " + event.row + " with value " + event.value );
   }
 
@@ -119,6 +129,54 @@ export class SudokuGridComponent implements OnInit {
 
 
   trackByIndex(index: number): number {return index; }
+
+  private showValidationMessage(message: string): void {
+    this.validationMessage = message;
+
+    clearTimeout(this.validationTimout);
+    this.validationTimout = setTimeout(() => {
+      this.validationMessage = '';
+    }, 3000);
+  }
+
+  private clearValidationMessage(): void {
+    this.validationMessage = '';
+    clearTimeout(this.validationTimout);
+  }
+
+
+
+  //Hilfsmethode: Überprüfung der Sudoku-Regeln:
+  private isMoveInvalid(row: number, col: number, value: number): boolean {
+    if (value === 0) return false;
+
+    // Zeile prüfen
+    if (this.grid[row].some((cell, i) => i !== col && cell.value === value)) {
+      this.showValidationMessage(`Zahl ${value} ist bereits in der Zeile.`);
+      return true;
+    }
+
+    // Spalte prüfen
+    if (this.grid.some((r, i) => i !== row && r[col].value === value)) {
+      this.showValidationMessage(`Zahl ${value} ist bereits in der Spalte.`);
+      return true;
+    }
+
+    // Kasten prüfen
+    const boxRowStart = Math.floor(row / 3) * 3;
+    const boxColStart = Math.floor(col / 3) * 3;
+    for (let i = boxRowStart; i < boxRowStart + 3; i++) {
+      for (let j = boxColStart; j < boxColStart + 3; j++) {
+        if ((i !== row || j !== col) && this.grid[i][j].value === value) {
+          this.showValidationMessage(`Zahl ${value} ist bereits im 3x3-Kasten.`);
+          return true;
+        }
+      }
+    }
+
+    return false;
+    }
+
 
   //Hilfsmethode, um das Grid von der Response zu setzen
   private setGridFromResponse(res: SudokuResponse): void {
