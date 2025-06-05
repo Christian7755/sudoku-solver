@@ -29,12 +29,13 @@ export class LoginComponent {
         this.message = '✅ eingeloggt';
         if (this.redirectAfterLogin) {
           this.router.navigate([this.redirectTo]);
-          window.location.reload();
         }
       },
       error: err => {
         this.message = '❌ ' + err.error;
       }
     });
+    window.location.reload();
   }
+  
 }
