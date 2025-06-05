@@ -30,12 +30,14 @@ export class LoginComponent {
         if (this.redirectAfterLogin) {
           this.router.navigate([this.redirectTo]);
         }
+        else{
+          window.location.reload();
+        }
       },
       error: err => {
         this.message = '❌ ' + err.error;
       }
     });
-    window.location.reload();
   }
   
 }
