@@ -1,13 +1,58 @@
-<div *ngIf="stats.length > 0; else noStats">
+<!--Spielstatistiken, wenn eingeloggt-->
+<div *ngIf="isLoggedIn; else noStats">
   <h3>Deine Spielstatistiken</h3>
-  <ul>
-    <li *ngFor="let stat of stats">
-      Start: {{ stat.startTime }} | Ende: {{ stat.endTime }} | 
-      Ergebnis: {{ stat.completed ? '✔ Erfolgreich' : '❌ Aufgegeben' }}
-    </li>
-  </ul>
-</div>
-<ng-template #noStats>
-  <p>Keine Statistikdaten vorhanden.</p>
-</ng-template>
 
+  <table>
+    <!-- Übergreifende Statistiken-->
+    <thead>
+      <tr>
+        <th>Anzahl Spiele</th>
+        <th>Erfolgreiche Spiele</th>
+        <th>Abgebrochene Spiele</th>
+        <th>Ø Zeit des Erfolgs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ totalGames }}</td>
+        <td>{{ successfulGames }}</td>
+        <td>{{ failedGames }}</td>
+        <!-- Darstellung, Abhängig ob Spiele Vorhanden sind in min-->
+        <td>{{ avgSuccessTime === 0 ? '-' : formatTime(avgSuccessTime) + ' min' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Darstellung der Einzelnen Spiele, falls Vorhanden-->
+  <h4>Alle Spiele</h4>
+  <div *ngIf="stats.length > 0; else noGames">
+    <table>
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Dauer</th>
+          <th>Ergebnis</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stat of stats">
+          <!-- Anpassung an Deutsches Format-->
+          <td>{{ stat.startTime | date:'dd.MM.yyyy' }}</td>
+          <td>
+            {{ stat.timeUsed === 0 ? 'nicht erfasst' : (formatTime(stat.timeUsed) + ' min') }}
+          </td>
+          <td>{{ stat.completed ? '✔ Erfolgreich' : '❌ Aufgegeben' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noGames>
+    <p>Du hast noch keine Spiele gespielt.</p>
+  </ng-template>
+</div>
+
+<!-- Nutzerhinweis, falls er nicht eingloggt ist-->
+<ng-template #noStats>
+  <p>Sie müssen sich einloggen um ihre Spielstatistiken zu sehen</p>
+</ng-template>

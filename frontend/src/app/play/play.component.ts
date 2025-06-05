@@ -75,6 +75,7 @@ export class PlayComponent {
 
     if (!this.gameId) return;
 
+    //für die Zeiterfassung der erfolgreichen Spiels
     const secondsUsed = this.clockComp.getTimeInSeconds() ?? 0;
 
     this.http.post(`http://localhost:8080/api/stats/end/${this.gameId}`, {
@@ -84,6 +85,11 @@ export class PlayComponent {
       headers: { 'Content-Type': 'application/json' }
     }).subscribe();
     
+    //Uhr auch auf der Oberfläche Anhalten
+    if (!this.clockComp.isPaused) {
+      this.clockComp.pause(); 
+    }
+
     this.gameEnded = true;
     if(!success){
       this.router.navigate(['']);
