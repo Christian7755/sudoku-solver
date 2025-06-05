@@ -30,6 +30,27 @@ export class SudokuCellComponent {
       const [rowOffset, colOffset] = movement[event.key];
       event.preventDefault(); // verhindert Scrollen
       this.moveFocus.emit({ rowOffset, colOffset });
+      return;
+    }
+
+    // Wenn es eine Ziffer von 1 bis 9 ist → direkt ersetzen
+    if (/^[1-9]$/.test(event.key) && this.changeable) {
+      event.preventDefault(); // verhindert, dass die Zahl angehängt wird
+      const newValue = parseInt(event.key, 10);
+      this.cellUpdated.emit({ row: this.row, col: this.col, value: newValue });
+
+      // Direkt wieder Fokussieren, damit Tastatureingaben weiter funktionieren
+      setTimeout(() => {
+        const input = (event.target as HTMLInputElement);
+        input.select();
+      });
+    }
+
+    
+    // Bei "0" oder "Backspace" → löschen
+    if ((event.key === '0' || event.key === 'Backspace') && this.changeable) {
+      event.preventDefault();
+      this.cellUpdated.emit({ row: this.row, col: this.col, value: 0 });
     }
   }
 
