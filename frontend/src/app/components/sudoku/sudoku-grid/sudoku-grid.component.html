@@ -5,7 +5,8 @@
     <app-sudoku-cell *ngFor="let cell of row; let colIndex = index; trackBy: trackByIndex"
                      [row]="rowIndex"
                      [col]="colIndex"
-                     [value]="cell"
+                     [value]="cell.value"
+                     [changeable]="cell.changeable"
                      (cellUpdated)="updateCell($event)">
     </app-sudoku-cell>
   </div>

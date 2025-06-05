@@ -9,6 +9,8 @@ import java.util.Arrays;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import sudoku.dto.SudokuRequest;
 import sudoku.dto.SudokuResponse;
 import org.springframework.http.MediaType;
@@ -36,16 +38,22 @@ public class SudokuController {
 
     @PostMapping("/solve")
     public ResponseEntity<SudokuResponse> solve(@Valid @RequestBody SudokuRequest request){
-        //fürs Debuggen
-        System.out.println("SudokuController: Eingehender Request für solving empfangen!");
-        System.out.println("Grid: " + Arrays.deepToString(request.grid()));
 
         //das gelöste Sudoku wird zur Response hinzugefügt
         int[][] solvedGrid = sudokuService.solve(request.grid());
+
+        //Boolean changeable: mit Wahrheitswerten für die Antwort gefüllt, falls nicht vorhanden
+        boolean[][] changeable;
+        if( request.changeable() != null){
+            changeable = request.changeable();
+        }
+        else { changeable = defaultchangeable(null);}
+
         var response = new SudokuResponse(
             solvedGrid,
             true,
-            "Solved successfully"
+            "Solved successfully",
+            changeable
         );
         return ResponseEntity.ok(response);
     }
@@ -56,8 +64,16 @@ public class SudokuController {
 
         try{
             int[][] generatedGrid = sudokuService.generate();
-            var response = new SudokuResponse(generatedGrid, true, "New sudoku generated");
-            
+
+            //Zusätzlich muss noch festgelegt werden, dass bestimmte Zellen nicht verändert werden dürfen
+            boolean[][] changeable = new boolean[9][9];
+            for(int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    changeable[i][j] = generatedGrid[i][j] == 0;
+                }
+            }
+            var response = new SudokuResponse(generatedGrid, true, "New sudoku generated", changeable);
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,5 +116,18 @@ public class SudokuController {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new SudokuResponse(null, false, "Import fehlgeschlagen: " + e.getMessage()));
         }
+    }
+
+
+    /* Um changeable überall auf Wahr zu markieren 
+    z.B. wenn dazu keine Angaben in der SudokuRequest sind */
+    private boolean[][] defaultchangeable(int[][] grid) {
+        boolean[][] changeable = new boolean[9][9];
+        for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            changeable[i][j] = true;
+        }
+    }
+        return changeable;
     }
 }

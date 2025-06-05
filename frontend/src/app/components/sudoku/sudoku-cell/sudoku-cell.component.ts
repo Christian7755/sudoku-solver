@@ -10,6 +10,7 @@ export class SudokuCellComponent {
   @Input() row!: number;
   @Input() col!: number;
   @Input() value!: number;
+  @Input() changeable: boolean = true;
   @Output() cellUpdated = new EventEmitter<{row: number, col: number, value: number}>();
 
 //wird aufgerufen, wenn der Wert der Zelle geändert wird.

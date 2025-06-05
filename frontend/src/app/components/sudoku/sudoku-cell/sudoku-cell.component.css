@@ -30,27 +30,14 @@
     border-left: 1px solid #ccc;
 }
 
-  
- /* .sudoku-cell-input {
-    border: none;
-    text-align: center;
-    font-size: 18px;
-    background-color: white;  /* Weißer Hintergrund für das Eingabefeld 
-    font-weight: bold;
-  }
-  .sudoku-cell.cell-1-1 {
-    background-color: black;
-  }
-  
-  .sudoku-cell-input:focus {
-    outline: 2px solid blue;  /* Blaue Umrandung, wenn das Eingabefeld fokussiert wird 
-  }
 
-  .sudoku-cell input {
-    border: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /*Anpassen: 9er Blöcke dickerer Rahmen, nur bestimmt Werte erlauben 
-*/
+/*Zellen welche nicht veränderbar sein sollen anders darstellen */
+.sudoku-cell-input.read-only {
+  background-color: #ccc;
+  font-weight: bold;
+  color: black;
+}
+
+.fixed-cell {
+  background-color: #ccc;
+}

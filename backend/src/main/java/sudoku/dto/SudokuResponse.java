@@ -5,4 +5,11 @@ package sudoku.dto;
 public record SudokuResponse(
     int[][] grid,
     boolean solvable,
-    String message) {}
+    String message,
+    boolean[][] changeable
+) {
+    //Kunstruktur, damit nicht angegeben werden muss, ob gewisse Zellen Potenziell nicht verändert werden dürfen
+    public SudokuResponse(int[][] grid, boolean solvable, String message) {
+        this(grid, solvable, message, null);
+    }
+}

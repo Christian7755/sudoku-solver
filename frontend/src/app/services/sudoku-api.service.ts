@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-export interface SudokuRequest { grid: number[][]; }
-export interface SudokuResponse { grid: number[][]; solvable: boolean; message: string}
+export interface SudokuRequest { grid: number[][]; changeable?: boolean[][]}
+export interface SudokuResponse { grid: number[][]; solvable: boolean; message: string; changeable: boolean[][]}
 
 @Injectable({ providedIn: 'root'})
 export class SudokuApiService {

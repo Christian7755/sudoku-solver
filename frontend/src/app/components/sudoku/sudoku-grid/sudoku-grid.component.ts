@@ -10,30 +10,23 @@ import { SudokuApiService, SudokuResponse } from '../../../services/sudoku-api.s
 
 export class SudokuGridComponent implements OnInit {
   
-  grid: number[][] = [
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0]
-  ];
+  
+  grid: { value: number; changeable: boolean}[][] = [];
 
   message = '';
 
   ngOnInit(): void {
-      
+    this.grid = Array.from({ length: 9 }, () =>
+      Array.from({ length: 9 }, () => ({ value: 0, changeable: true }))
+    );
   }
 
   constructor(private api: SudokuApiService) { }
 
   solve(): void {
-    this.api.solve(this.grid).subscribe({
+    this.api.solve(this.getNumberGrid()).subscribe({
       next: res => {
-        this.grid = res.grid;
+        this.setGridFromResponse(res);
         this.message = res.message;
       },
       error: err => this.message = 'Fehler: ' + err.message
@@ -43,7 +36,7 @@ export class SudokuGridComponent implements OnInit {
   generate(): void {
     this.api.generate().subscribe({
       next: res => {
-        this.grid = res.grid;
+        this.setGridFromResponse(res);
         this.message = res.message;
       },
       error: err => this.message = 'Fehler: ' + err.message
@@ -52,7 +45,7 @@ export class SudokuGridComponent implements OnInit {
 
   /** Export-Handler */
   export(): void {
-    this.api.exportCsv(this.grid).subscribe({
+    this.api.exportCsv(this.getNumberGrid()).subscribe({
       next: blob => {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -72,7 +65,8 @@ export class SudokuGridComponent implements OnInit {
     this.api.importCsv(file).subscribe({
       next: (res: SudokuResponse) => {
         if (res.solvable) {
-          this.grid = res.grid;
+          console.log("Das Grid wird gesetzt");
+          this.setGridFromResponse(res);
           this.message = res.message;
         } else {
           this.message = 'Import fehlgeschlagen: ' + res.message;
@@ -86,20 +80,41 @@ export class SudokuGridComponent implements OnInit {
 
   //Setter für die einzelne Zelle
   setCell(row: number, col: number, value: number): void {
-    this.grid[row][col] = value;
+    this.grid[row][col].value = value;
   }
 
   //Getter für die einzelne Zelle
   getCell(row: number, col: number): number {
-    return this.grid[row][col];
+    return this.grid[row][col].value;
   }
 
   //um den Wert der einzelnen Zelle upzudaten
   updateCell(event: { row: number, col: number, value: number}) {
-    this.grid[event.row][event.col] = event.value;
+    this.grid[event.row][event.col].value = event.value;
 
     console.log("Sudoku-Grid: update cell col" + event.col + " and row " + event.row + " with value " + event.value );
   }
 
   trackByIndex(index: number): number {return index; }
+
+  //Hilfsmethode, um das Grid von der Response zu setzen
+  private setGridFromResponse(res: SudokuResponse): void {
+
+    //Fallback, falls in der Response die Angaben zu changeable fehlen
+    const fallbackChangable = res.grid.map(row => row.map(() => true));
+    const changeableGrid = res.changeable ?? fallbackChangable;
+
+    this.grid = res.grid.map((row, i) =>
+      row.map((value, j) => ({
+        value,
+        changeable: changeableGrid[i][j]
+      }))
+  );
+  }
+
+  //Hilfsmethode um bei dem Methodenaufruf nur die Werte ohne die Wahrheitswerte zu verwenden
+  private getNumberGrid(): number[][] {
+    return this.grid.map(row => row.map(cell => cell.value));
+  }
+
 }
