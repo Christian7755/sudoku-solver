@@ -19,6 +19,8 @@ Erlaubt das Generieren, Importieren, Exportieren, Lösen von und Spielen mit Sud
 
 3. Aufruf
    Die Anwendung sollte unter http://localhost4200 sichtbar sein.
+   Das Backend läuft unter http://localhost:8080, wobei einige Pfade, inclusive dem Root Pfad, von der Authentifizierung geschützt sind.
+
 
 ## Login, User Stats
 Konfigurierter Testnutzer für die Abgabe:
