@@ -6,6 +6,8 @@ export interface SudokuRequest { grid: number[][]; changeable?: boolean[][]}
 export interface SudokuResponse { grid: number[][]; solvable: boolean; message: string; changeable: boolean[][]}
 
 @Injectable({ providedIn: 'root'})
+
+//Verwaltet die Sudoku Anfragen, welche keinen Login erfordern
 export class SudokuApiService {
 
     private readonly baseUrl = window.location.hostname.includes('localhost')

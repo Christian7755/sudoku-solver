@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+//SudokuService: wird vom SudokuController Verwendet für die Vorgänge bezüglich dem Lösen, Erstellen oder Validieren von Sudokus
 @Service
 @RequiredArgsConstructor
 public class SudokuService {

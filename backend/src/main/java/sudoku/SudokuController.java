@@ -22,7 +22,7 @@ import org.springframework.http.ContentDisposition;
 import java.io.IOException;
 
 
-//Sudoku-Controller. Used for all Http Requests concerning the sudoku
+//Sudoku-Controller. Für die Ganzen HTTP-Requests in Bezug auf das Sudoku
 @RestController
 @RequestMapping("/api/sudoku")
 @RequiredArgsConstructor
@@ -61,6 +61,7 @@ public class SudokuController {
         return ResponseEntity.ok(isSolved);
     }
 
+    //Um ein Sudoku generieren zu lassen. Nicht geschützt
     @GetMapping("/generate")
     public ResponseEntity<SudokuResponse> generate(){
         System.out.println("SudokuController: Eingehender Request für generate empfangen!");

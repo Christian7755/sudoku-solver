@@ -7,5 +7,7 @@ import { Component, Input } from '@angular/core';
   standalone: true
 })
 export class ButtonComponent {
+
+  //Test des Buttons als Input-Feld 
   @Input() text: string = '';
 }

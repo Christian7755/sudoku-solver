@@ -19,6 +19,8 @@ export class SudokuCellComponent {
 
 
   onKeyDown(event: KeyboardEvent): void {
+    
+    //Logik, um Bewegungen zwischen den Zellen mit dem Keyboard zu ermöglichen
     const movement: Record<string, [number, number]> = {
       ArrowUp: [-1, 0],
       ArrowDown: [1, 0],
@@ -74,7 +76,7 @@ export class SudokuCellComponent {
     this.cellUpdated.emit({ row: this.row, col: this.col, value });
   }
 
-
+  //Umgang mit der Tastatureingabe
   onKeyPress(event: KeyboardEvent): void {
     const allowedKeys = ['1','2','3','4','5','6','7','8','9'];
     if (!allowedKeys.includes(event.key)) {

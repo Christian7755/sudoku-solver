@@ -11,16 +11,6 @@
     max-width: 1em;
 }
 
-/* needs do be adapted */
-#quit-button {
-    color: red;
-}
-
-#pause-button {
-    --button-bg: gold;
-    --button-color: black;
-}
-
 .main-content {
     display: flex;
     align-items: flex-start;
@@ -43,7 +33,7 @@ h1 {
     color: blueviolet;
 }
 
-
+/*Styling der Erfolgsmeldung */
 .blink-success {
   color: blueviolet;
   font-size: 2rem;
@@ -59,6 +49,7 @@ h1 {
 }
 
 
+/*Styling des Overlay für die Pause. Überdeckt den gesamten Bildschirm mit gewisser Transparenz*/
 .overlay {
   position: absolute;
   top: 0;

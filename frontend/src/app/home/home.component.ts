@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
   standalone: false
 })
+
+//Dies ist die Startcomponente
 export class HomeComponent {
   title = 'sudoku-solver';
 

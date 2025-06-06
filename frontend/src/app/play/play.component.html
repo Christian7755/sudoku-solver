@@ -6,11 +6,13 @@
         <app-button class="continue-overlay-button" [text]="'Continue'"  (click)="togglePause()"></app-button>
     </div>
 
+    <!-- Grid und Uhr. Eigenes Div für das Styling-->
     <div class="main-content">
         <app-sudoku-grid (cellChanged)="onCellChanged($event)"></app-sudoku-grid>
         <app-clock #clock></app-clock>
     </div>
 
+    <!--Die Buttons mit den möglichen Vorgängen sind abhängig davon, ob das Spiel beendet ist-->
     <div class="container_buttons">
         <app-button *ngIf ="!gameSuccessful" id="quit-button" [text]="'Quit'" (click)="endGame(false)"></app-button>
         <app-button *ngIf ="!gameSuccessful" id="pause-button" [text]="'Pause'" (click)="togglePause()"></app-button>

@@ -7,6 +7,8 @@ import { LoginComponent } from '../components/login/login.component';
   templateUrl: './play-login.component.html',
   styleUrl: './play-login.component.css'
 })
+
+//einfache Login Komponente auf extra Seite. Wird dem Play-Mode vorgezogen, wenn der Nutzer nicht eingeloggt ist.
 export class PlayLoginComponent {
 
 }

@@ -23,6 +23,7 @@ export class LoginComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
+  //Umsetzung der Login-Logik mit entsprechenden Meldungen
   login(): void {
     this.auth.login(this.username, this.password).subscribe({
       next: () => {

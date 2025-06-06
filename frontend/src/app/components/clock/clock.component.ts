@@ -11,6 +11,7 @@ export class ClockComponent implements OnInit, OnDestroy {
   private timer: any;
   isPaused = false;
 
+  //Beim Initalisieren der Komponente wird der Timer direkt gestartet.
   ngOnInit(): void {
     this.startTimer();
   }
@@ -19,6 +20,7 @@ export class ClockComponent implements OnInit, OnDestroy {
     clearInterval(this.timer);
   }
 
+  //Zeit Logik in Bezug auf Minuten und Sekunden. Stunden sind in der Anwendung von der Darstellung unberücksichtigt
   private startTimer(): void {
     this.timer = setInterval(() => {
       if (!this.isPaused) {

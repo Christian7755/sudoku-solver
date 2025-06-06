@@ -31,6 +31,7 @@ export class SudokuGridComponent implements OnInit {
 
   constructor(private api: SudokuApiService) { }
 
+  //Lösungslogik
   solve(): void {
     this.api.solve(this.getNumberGrid()).subscribe({
       next: res => {
@@ -111,11 +112,13 @@ export class SudokuGridComponent implements OnInit {
     console.log("Sudoku-Grid: update cell col" + event.col + " and row " + event.row + " with value " + event.value );
   }
 
+  //Fokussierung von einzelnen Zellen
   onFocus(row: number, col: number): void {
     this.focusedRow = row;
     this.focusedCol = col;
   }
 
+  //Ändern der Focusierten Zelle
   moveFocus(event: { rowOffset: number, colOffset: number }): void {
     if (this.focusedRow === null || this.focusedCol === null) return;
     const newRow = (this.focusedRow + event.rowOffset + 9) % 9;
@@ -134,6 +137,7 @@ export class SudokuGridComponent implements OnInit {
 
   trackByIndex(index: number): number {return index; }
 
+  //Bei Eingaben, soll eine Fehlermeldung erscheinen
   private showValidationMessage(message: string): void {
     this.validationMessage = message;
 
@@ -143,6 +147,7 @@ export class SudokuGridComponent implements OnInit {
     }, 3000);
   }
 
+  //Fehlermeldung entfernen. Wird bei erneuten Nutzereingaben verwendet.
   private clearValidationMessage(): void {
     this.validationMessage = '';
     clearTimeout(this.validationTimout);

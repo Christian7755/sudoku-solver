@@ -18,9 +18,11 @@ export class PlayComponent {
 
   constructor(private authService: AuthService, private http: HttpClient, public router: Router){}
   
+  //Initialisierung der Clock Componente
   @ViewChild('clock') clockComp!: ClockComponent;
   pauseOverlay: boolean = false;
 
+  //Für die Funktion des Pausierens
   togglePause(): void {
     this.pauseOverlay = !this.pauseOverlay;
     this.clockComp.pause();
@@ -29,6 +31,8 @@ export class PlayComponent {
   @ViewChild(SudokuGridComponent) gridComp!: SudokuGridComponent;
   gameId!: number;
 
+
+  //Beim Initialisieren der Komponente wird ein Spiel gestartet
   ngAfterViewInit(): void {
     this.startGame();
   }
@@ -47,6 +51,8 @@ export class PlayComponent {
     //for Debugging
     console.log("Cell Changed: check in Play COmponent");
     const isComplete = grid.every(row => row.every(cell => cell.value !== 0));
+
+    //Die Prüfung, ob ein Sudoku erfolgreich beendet ist erfolgt erst, wenn es vollständig ausgefüllt ist
     if(!isComplete) return;
 
     const numberGrid: number [][] = grid.map(row => row.map(cell => cell.value));
@@ -57,6 +63,7 @@ export class PlayComponent {
       changeable: changeableGrid
     }
 
+    //Zusätzliche Validierung im Backend
     this.http.post<SudokuRequest>('http://localhost:8080/api/sudoku/validate', request, {
       headers: { 'Content-Type': 'application/json'}
     }).subscribe({
