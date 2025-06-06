@@ -6,8 +6,6 @@ Erlaubt das Generieren, Importieren, Exportieren, Lösen von und Spielen mit Sud
 
 ## Voraussetzungen
 - Docker und Docker Compose müssen installiert sein.
-- Node.js und npm müssen auf dem System installiert sein um das Frontend zu bauen
-- Java muss für das Backend installiert sein
 
 ## Projekt starten
 
@@ -21,8 +19,6 @@ Erlaubt das Generieren, Importieren, Exportieren, Lösen von und Spielen mit Sud
 
 3. Aufruf
    Die Anwendung sollte unter http://localhost4200 sichtbar sein.
-
-   Das Backend läuft unter http://localhost:8080 
 
 ## Login, User Stats
 Konfigurierter Testnutzer für die Abgabe:

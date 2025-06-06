@@ -4,12 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import sudoku.dto.SudokuRequest;
 import sudoku.dto.SudokuResponse;
